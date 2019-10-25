@@ -5,6 +5,8 @@
 //! the `prost-types` crate in order to avoid a cyclic dependency between `prost` and
 //! `prost-build`.
 
+use std::prelude::v1::*;
+
 use ::bytes::{Buf, BufMut};
 
 use crate::encoding::*;

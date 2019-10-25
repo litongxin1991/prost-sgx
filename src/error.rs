@@ -1,5 +1,6 @@
 //! Protobuf encoding and decoding errors.
 
+use std::prelude::v1::*;
 use std::borrow::Cow;
 use std::error;
 use std::fmt;

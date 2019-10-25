@@ -2,6 +2,7 @@
 //!
 //! Meant to be used only from `Message` implementations.
 
+use std::prelude::v1::*;
 use std::cmp::min;
 use std::mem;
 use std::u32;

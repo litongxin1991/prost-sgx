@@ -11,46 +11,49 @@ description = "A Protocol Buffers implementation for the Rust Language."
 keywords = ["protobuf", "serialization"]
 categories = ["encoding"]
 edition = "2018"
+exclude = [
+  # The fuzz crate can't be compiled or tested without the 'cargo fuzz' command,
+  # so exclude it from normal builds.
+  "fuzz",
+  "/sgx/*",
+]
 
 [badges]
 travis-ci = { repository = "danburkert/prost" }
 appveyor = { repository = "danburkert/prost" }
 
-[workspace]
-members = [
-  "conformance",
-  "prost-build",
-  "prost-derive",
-  "prost-types",
-  "protobuf",
-  "tests",
-  "tests-2015",
-]
-exclude = [
-  # The fuzz crate can't be compiled or tested without the 'cargo fuzz' command,
-  # so exclude it from normal builds.
-  "fuzz",
-]
+#[workspace]
+#members = [
+#  "conformance",
+#  "prost-build",
+#  "prost-derive",
+#  "prost-types",
+#  "protobuf",
+#  "tests",
+#  "tests-2015",
+#]
 
 [features]
-default = ["prost-derive"]
+default = ["prost-derive", "mesalock_sgx"]
 no-recursion-limit = []
+mesalock_sgx = ["sgx_tstd"]
 
 [dependencies]
-bytes = "0.4.7"
+bytes = { git = "https://github.com/mesalock-linux/bytes-sgx" }
 prost-derive = { version = "0.5.0", path = "prost-derive", optional = true }
+sgx_tstd = { rev = "v1.0.9", git = "https://github.com/baidu/rust-sgx-sdk.git", optional = true }
 
 [dev-dependencies]
-criterion = "0.2"
-env_logger = { version = "0.6", default-features = false }
-failure = "0.1"
-log = "0.4"
-protobuf = { version = "0", path = "protobuf" }
-quickcheck = "0.8"
+#criterion = "0.2"
+#env_logger = { version = "0.6", default-features = false }
+#failure = "0.1"
+#log = "0.4"
+#protobuf = { version = "0", path = "protobuf" }
+#quickcheck = "0.8"
 
-[[bench]]
-name = "varint"
+#[[bench]]
+#name = "varint"
 
-[[bench]]
-name = "benchmark"
-harness = false
+#[[bench]]
+#name = "benchmark"
+#harness = false
